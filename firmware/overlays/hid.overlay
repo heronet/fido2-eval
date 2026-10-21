@@ -1,0 +1,16 @@
+/ {
+	chosen {
+		zephyr,fido2-hid = &fido2_hid;
+	};
+};
+/* FIDO2 variants only. */
+
+&zephyr_udc0 {
+	status = "okay";
+
+	fido2_hid: fido2_hid {
+		compatible = "zephyr,hid-device";
+		in-report-size = <64>;
+		in-polling-period-us = <1000>;
+	};
+};

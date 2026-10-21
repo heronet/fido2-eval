@@ -1,0 +1,60 @@
+mainmenu "FIDO2 coexistence experiment"
+
+source "Kconfig.zephyr"
+
+menu "Experiment"
+
+config BENCH_BUILD_ID
+	string "Build identity"
+	default "unrecorded"
+
+config BENCH_NODE_ID
+	string "Commissioned node identifier (ASCII letters, digits, underscore or hyphen)"
+	default "node-001"
+
+config BENCH_VARIANT
+	string "Build configuration label"
+	default "baseline"
+
+config BENCH_CONTROL_CDC_ACM
+	bool "Use USB CDC ACM for the experiment control channel"
+	depends on USB_DEVICE_STACK_NEXT && USBD_CDC_ACM_CLASS
+	help
+	  Enable CDC control in all firmware variants.
+	  The host asserts DTR. HID and CDC share the native USB connection.
+
+config BENCH_USB_VID
+	hex "USB vendor ID"
+	default 0
+
+config BENCH_USB_PID
+	hex "USB product ID"
+	default 0
+
+config BENCH_PERIOD_MS
+	int "Periodic task interval in milliseconds"
+	default 100
+	range 1 10000
+
+config BENCH_DEADLINE_MS
+	int "Relative deadline in milliseconds"
+	default 100
+	range 1 10000
+
+config BENCH_WORK_ROUNDS
+	int "Deterministic integer processing rounds per release"
+	default 1000
+	range 0 10000000
+
+config BENCH_WORK_PRIORITY
+	int "Workload preemptive thread priority"
+	default 5
+	range 0 14
+
+config BENCH_SENSOR
+	bool "Use the ambient-temperature sensor at alias bench-sensor"
+	select SENSOR
+	help
+	  Use a deterministic synthetic trace when disabled.
+
+endmenu

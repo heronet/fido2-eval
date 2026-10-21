@@ -1,0 +1,1388 @@
+/dts-v1/;
+
+/* node '/' defined in ../../Source/embedded/zephyr/dts/common/skeleton.dtsi:9 */
+/ {
+	#address-cells = < 0x1 >;                          /* in ../../Source/embedded/zephyr/dts/common/skeleton.dtsi:10 */
+	#size-cells = < 0x1 >;                             /* in ../../Source/embedded/zephyr/dts/common/skeleton.dtsi:11 */
+	model = "WeAct Studio Black Pill STM32H523 Board"; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:13 */
+	compatible = "weact,blackpill-h523ce";             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:14 */
+
+	/* node '/chosen' defined in ../../Source/embedded/zephyr/dts/common/skeleton.dtsi:13 */
+	chosen {
+		zephyr,crc = &crc;                        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:23 */
+		zephyr,flash-controller = &flash;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:24 */
+		zephyr,entropy = &rng;                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:25 */
+		zephyr,shell-uart = &usart1;              /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:18 */
+		zephyr,sram = &sram1;                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:19 */
+		zephyr,flash = &flash0;                   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:20 */
+		bench,control-uart = &board_cdc_acm_uart; /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:11 */
+		zephyr,fido2-up-input = &buttons;         /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:12 */
+		zephyr,console = &board_cdc_acm_uart;     /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:13 */
+		zephyr,code-partition = &code_partition;  /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:14 */
+	};
+
+	/* node '/aliases' defined in ../../Source/embedded/zephyr/dts/common/skeleton.dtsi:15 */
+	aliases {
+		led0 = &user_led;     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:43 */
+		sw0 = &user_button;   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:44 */
+		volt-sensor0 = &vref; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:45 */
+		volt-sensor1 = &vbat; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:46 */
+	};
+
+	/* node '/soc' defined in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:6 */
+	soc {
+		#address-cells = < 0x1 >;     /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:7 */
+		#size-cells = < 0x1 >;        /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:8 */
+		interrupt-parent = < &nvic >; /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:10 */
+		ranges;                       /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:11 */
+		compatible = "st,stm32h523",
+		             "st,stm32h5",
+		             "simple-bus";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:20 */
+
+		/* node '/soc/interrupt-controller@e000e100' defined in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:13 */
+		nvic: interrupt-controller@e000e100 {
+			#address-cells = < 0x1 >;            /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:14 */
+			compatible = "arm,v8m-nvic";         /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:15 */
+			reg = < 0xe000e100 0xc00 >;          /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:16 */
+			interrupt-controller;                /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:17 */
+			#interrupt-cells = < 0x2 >;          /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:18 */
+			arm,num-irq-priority-bits = < 0x4 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:874 */
+			phandle = < 0x1 >;                   /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:10 */
+		};
+
+		/* node '/soc/timer@e000e010' defined in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:21 */
+		systick: timer@e000e010 {
+			compatible = "arm,armv8m-systick"; /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:22 */
+			reg = < 0xe000e010 0x10 >;         /* in ../../Source/embedded/zephyr/dts/arm/armv8-m.dtsi:23 */
+		};
+
+		/* node '/soc/flash-controller@40022000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:130 */
+		flash: flash-controller@40022000 {
+			compatible = "st,stm32-flash-controller",
+			             "st,stm32l5-flash-controller"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:131 */
+			reg = < 0x40022000 0x400 >;                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:132 */
+			interrupts = < 0x6 0x0 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:133 */
+			#address-cells = < 0x1 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:135 */
+			#size-cells = < 0x1 >;                      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:136 */
+			ranges;                                     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:137 */
+
+			/* node '/soc/flash-controller@40022000/flash@8000000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:139 */
+			flash0: flash@8000000 {
+				compatible = "st,stm32-nv-flash",
+				             "soc-nv-flash";        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:140 */
+				#address-cells = < 0x1 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:141 */
+				#size-cells = < 0x1 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:142 */
+				write-block-size = < 0x10 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:143 */
+				erase-block-size = < 0x2000 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:144 */
+				max-erase-time = < 0xa >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:146 */
+				reg = < 0x8000000 0x80000 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:31 */
+				ranges = < 0x0 0x8000000 0x80000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:32 */
+
+				/* node '/soc/flash-controller@40022000/flash@8000000/partitions' defined in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:27 */
+				partitions {
+					#address-cells = < 0x1 >; /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:28 */
+					#size-cells = < 0x1 >;    /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:29 */
+					ranges;                   /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:30 */
+
+					/* node '/soc/flash-controller@40022000/flash@8000000/partitions/partition@0' defined in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:32 */
+					code_partition: partition@0 {
+						compatible = "zephyr,mapped-partition"; /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:33 */
+						label = "image-0";                      /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:34 */
+						reg = < 0x0 0x68000 >;                  /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:35 */
+					};
+
+					/* node '/soc/flash-controller@40022000/flash@8000000/partitions/partition@68000' defined in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:38 */
+					storage_partition: partition@68000 {
+						compatible = "zephyr,mapped-partition"; /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:39 */
+						label = "storage";                      /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:40 */
+						reg = < 0x68000 0x18000 >;              /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:41 */
+					};
+				};
+			};
+
+			/* node '/soc/flash-controller@40022000/flash@8fff000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:149 */
+			st_nvm_user_otp: flash@8fff000 {
+				compatible = "st,stm32-nvm-otp"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:150 */
+				reg = < 0x8fff000 0x800 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:151 */
+				status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:152 */
+			};
+
+			/* node '/soc/flash-controller@40022000/flash@8fff800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:156 */
+			flash@8fff800 {
+				compatible = "st,stm32-nvm-otp"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:157 */
+				reg = < 0x8fff800 0x800 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:158 */
+
+				/* node '/soc/flash-controller@40022000/flash@8fff800/nvmem-layout' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:160 */
+				nvmem-layout {
+					compatible = "fixed-layout"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:161 */
+					#address-cells = < 0x1 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:162 */
+					#size-cells = < 0x1 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:163 */
+
+					/* node '/soc/flash-controller@40022000/flash@8fff800/nvmem-layout/vrefint@10' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:165 */
+					vrefint_otp: vrefint@10 {
+						reg = < 0x10 0x2 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:166 */
+						#nvmem-cell-cells = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:167 */
+						read-only;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:168 */
+						phandle = < 0x1d >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:832 */
+					};
+
+					/* node '/soc/flash-controller@40022000/flash@8fff800/nvmem-layout/ts-cal1@14' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:171 */
+					ts_cal1_otp: ts-cal1@14 {
+						reg = < 0x14 0x2 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:172 */
+						#nvmem-cell-cells = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:173 */
+						read-only;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:174 */
+						phandle = < 0x1a >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:820 */
+					};
+
+					/* node '/soc/flash-controller@40022000/flash@8fff800/nvmem-layout/ts-cal2@18' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:177 */
+					ts_cal2_otp: ts-cal2@18 {
+						reg = < 0x18 0x2 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:178 */
+						#nvmem-cell-cells = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:179 */
+						read-only;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:180 */
+						phandle = < 0x1b >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:820 */
+					};
+				};
+			};
+		};
+
+		/* node '/soc/memory@40036400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:186 */
+		backup_sram: memory@40036400 {
+			compatible = "zephyr,memory-region",
+			             "st,stm32-backup-sram";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:187 */
+			reg = < 0x40036400 0x800 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:188 */
+			clocks = < &rcc 0x88 0x10000000 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:189 */
+			zephyr,memory-region = "BACKUP_SRAM"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:190 */
+			status = "disabled";                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:191 */
+		};
+
+		/* node '/soc/rcc@44020c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:194 */
+		rcc: rcc@44020c00 {
+			compatible = "st,stm32h5-rcc";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:195 */
+			clocks-controller;               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:196 */
+			#clock-cells = < 0x2 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:197 */
+			reg = < 0x44020c00 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:198 */
+			clocks = < &pll >;               /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:132 */
+			clock-frequency = < 0xe4e1c00 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:133 */
+			ahb-prescaler = < 0x1 >;         /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:134 */
+			apb1-prescaler = < 0x1 >;        /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:135 */
+			apb2-prescaler = < 0x1 >;        /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:136 */
+			apb3-prescaler = < 0x1 >;        /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:137 */
+			phandle = < 0x2 >;               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:189 */
+
+			/* node '/soc/rcc@44020c00/reset-controller' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:200 */
+			rctl: reset-controller {
+				compatible = "st,stm32-rcc-rctl"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:201 */
+				#reset-cells = < 0x1 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:202 */
+				phandle = < 0x4 >;                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:279 */
+			};
+		};
+
+		/* node '/soc/interrupt-controller@44022000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:206 */
+		exti: interrupt-controller@44022000 {
+			compatible = "st,stm32g0-exti",
+			             "st,stm32-exti";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:207 */
+			interrupt-controller;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:208 */
+			#interrupt-cells = < 0x1 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:209 */
+			#address-cells = < 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:210 */
+			reg = < 0x44022000 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:211 */
+			clocks = < &rcc 0xa8 0x2 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:212 */
+			num-lines = < 0x40 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:213 */
+			interrupts = < 0xb 0x0 >,
+			             < 0xc 0x0 >,
+			             < 0xd 0x0 >,
+			             < 0xe 0x0 >,
+			             < 0xf 0x0 >,
+			             < 0x10 0x0 >,
+			             < 0x11 0x0 >,
+			             < 0x12 0x0 >,
+			             < 0x13 0x0 >,
+			             < 0x14 0x0 >,
+			             < 0x15 0x0 >,
+			             < 0x16 0x0 >,
+			             < 0x17 0x0 >,
+			             < 0x18 0x0 >,
+			             < 0x19 0x0 >,
+			             < 0x1a 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:214 */
+			interrupt-names = "line0",
+			                  "line1",
+			                  "line2",
+			                  "line3",
+			                  "line4",
+			                  "line5",
+			                  "line6",
+			                  "line7",
+			                  "line8",
+			                  "line9",
+			                  "line10",
+			                  "line11",
+			                  "line12",
+			                  "line13",
+			                  "line14",
+			                  "line15";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:218 */
+			line-ranges = < 0x0 0x1 >,
+			              < 0x1 0x1 >,
+			              < 0x2 0x1 >,
+			              < 0x3 0x1 >,
+			              < 0x4 0x1 >,
+			              < 0x5 0x1 >,
+			              < 0x6 0x1 >,
+			              < 0x7 0x1 >,
+			              < 0x8 0x1 >,
+			              < 0x9 0x1 >,
+			              < 0xa 0x1 >,
+			              < 0xb 0x1 >,
+			              < 0xc 0x1 >,
+			              < 0xd 0x1 >,
+			              < 0xe 0x1 >,
+			              < 0xf 0x1 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:222 */
+		};
+
+		/* node '/soc/pin-controller@42020000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:228 */
+		pinctrl: pin-controller@42020000 {
+			compatible = "st,stm32h5-pinctrl",
+			             "st,stm32-pinctrl";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:229 */
+			#address-cells = < 0x1 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:230 */
+			#size-cells = < 0x1 >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:231 */
+			reg = < 0x42020000 0x2000 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:232 */
+			ranges;                            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:233 */
+
+			/* node '/soc/pin-controller@42020000/gpio@42020000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:235 */
+			gpioa: gpio@42020000 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:236 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:237 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:238 */
+				reg = < 0x42020000 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:239 */
+				clocks = < &rcc 0x8c 0x1 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:240 */
+				phandle = < 0x15 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:756 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42020400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:243 */
+			gpiob: gpio@42020400 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:244 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:245 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:246 */
+				reg = < 0x42020400 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:247 */
+				clocks = < &rcc 0x8c 0x2 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:248 */
+				phandle = < 0xc >;            /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:71 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42020800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:251 */
+			gpioc: gpio@42020800 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:252 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:253 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:254 */
+				reg = < 0x42020800 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:255 */
+				clocks = < &rcc 0x8c 0x4 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:256 */
+				phandle = < 0x16 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:771 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42020c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:259 */
+			gpiod: gpio@42020c00 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:260 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:261 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:262 */
+				reg = < 0x42020c00 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:263 */
+				clocks = < &rcc 0x8c 0x8 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:264 */
+				phandle = < 0x17 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:104 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42021c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:267 */
+			gpioh: gpio@42021c00 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:268 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:269 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:270 */
+				reg = < 0x42021c00 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:271 */
+				clocks = < &rcc 0x8c 0x80 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:272 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42021000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:23 */
+			gpioe: gpio@42021000 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:24 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:25 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:26 */
+				reg = < 0x42021000 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:27 */
+				clocks = < &rcc 0x8c 0x10 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:28 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42021400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:31 */
+			gpiof: gpio@42021400 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:32 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:33 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:34 */
+				reg = < 0x42021400 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:35 */
+				clocks = < &rcc 0x8c 0x20 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:36 */
+			};
+
+			/* node '/soc/pin-controller@42020000/gpio@42021800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:39 */
+			gpiog: gpio@42021800 {
+				compatible = "st,stm32-gpio"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:40 */
+				gpio-controller;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:41 */
+				#gpio-cells = < 0x2 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:42 */
+				reg = < 0x42021800 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:43 */
+				clocks = < &rcc 0x8c 0x40 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:44 */
+			};
+
+			/* node '/soc/pin-controller@42020000/adc1_inp1_pa1' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:19 */
+			adc1_inp1_pa1: adc1_inp1_pa1 {
+				pinmux = < 0x30 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:20 */
+				phandle = < 0x7 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:95 */
+			};
+
+			/* node '/soc/pin-controller@42020000/i2c1_scl_pb6' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:557 */
+			i2c1_scl_pb6: i2c1_scl_pb6 {
+				pinmux = < 0x2c4 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:558 */
+				bias-pull-up;       /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:559 */
+				drive-open-drain;   /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:560 */
+				phandle = < 0xa >;  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:69 */
+			};
+
+			/* node '/soc/pin-controller@42020000/i2c1_sda_pb7' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:582 */
+			i2c1_sda_pb7: i2c1_sda_pb7 {
+				pinmux = < 0x2e4 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:583 */
+				bias-pull-up;       /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:584 */
+				drive-open-drain;   /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:585 */
+				phandle = < 0xb >;  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:69 */
+			};
+
+			/* node '/soc/pin-controller@42020000/spi1_miso_pa6' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1184 */
+			spi1_miso_pa6: spi1_miso_pa6 {
+				pinmux = < 0xc5 >;             /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1185 */
+				bias-pull-down;                /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1186 */
+				slew-rate = "very-high-speed"; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1187 */
+				phandle = < 0xf >;             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:78 */
+			};
+
+			/* node '/soc/pin-controller@42020000/spi1_mosi_pa7' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1239 */
+			spi1_mosi_pa7: spi1_mosi_pa7 {
+				pinmux = < 0xe5 >;             /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1240 */
+				bias-pull-down;                /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1241 */
+				slew-rate = "very-high-speed"; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1242 */
+				phandle = < 0x10 >;            /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:78 */
+			};
+
+			/* node '/soc/pin-controller@42020000/spi1_nss_pa4' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1318 */
+			spi1_nss_pa4: spi1_nss_pa4 {
+				pinmux = < 0x85 >;             /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1319 */
+				bias-pull-up;                  /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1320 */
+				slew-rate = "very-high-speed"; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1321 */
+				phandle = < 0xe >;             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:78 */
+			};
+
+			/* node '/soc/pin-controller@42020000/spi1_sck_pa5' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1379 */
+			spi1_sck_pa5: spi1_sck_pa5 {
+				pinmux = < 0xa5 >;             /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1380 */
+				bias-pull-down;                /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1381 */
+				slew-rate = "very-high-speed"; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1382 */
+				phandle = < 0xd >;             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:78 */
+			};
+
+			/* node '/soc/pin-controller@42020000/tim3_ch3_pb0' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1573 */
+			tim3_ch3_pb0: tim3_ch3_pb0 {
+				pinmux = < 0x202 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1574 */
+				phandle = < 0x8 >;  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:56 */
+			};
+
+			/* node '/soc/pin-controller@42020000/tim3_ch4_pb1' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1577 */
+			tim3_ch4_pb1: tim3_ch4_pb1 {
+				pinmux = < 0x222 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1578 */
+				phandle = < 0x9 >;  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:56 */
+			};
+
+			/* node '/soc/pin-controller@42020000/usart1_rx_pa10' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1827 */
+			usart1_rx_pa10: usart1_rx_pa10 {
+				pinmux = < 0x147 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1828 */
+				phandle = < 0x6 >;  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:62 */
+			};
+
+			/* node '/soc/pin-controller@42020000/usart1_tx_pa9' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1914 */
+			usart1_tx_pa9: usart1_tx_pa9 {
+				pinmux = < 0x127 >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1915 */
+				bias-pull-up;       /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:1916 */
+				phandle = < 0x5 >;  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:62 */
+			};
+
+			/* node '/soc/pin-controller@42020000/usb_dm_pa11' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:2028 */
+			usb_dm_pa11: usb_dm_pa11 {
+				pinmux = < 0x16a >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:2029 */
+				phandle = < 0x13 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:89 */
+			};
+
+			/* node '/soc/pin-controller@42020000/usb_dp_pa12' defined in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:2032 */
+			usb_dp_pa12: usb_dp_pa12 {
+				pinmux = < 0x18a >; /* in modules/hal/stm32/dts/st/h5/stm32h523retx-pinctrl.dtsi:2033 */
+				phandle = < 0x14 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:89 */
+			};
+		};
+
+		/* node '/soc/timers@44004400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:276 */
+		lptim1: timers@44004400 {
+			compatible = "st,stm32u5-lptim",
+			             "st,stm32-lptim";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:277 */
+			clocks = < &rcc 0xa8 0x800 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:278 */
+			resets = < &rctl 0x100b >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:279 */
+			#address-cells = < 0x1 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:280 */
+			#size-cells = < 0x0 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:281 */
+			reg = < 0x44004400 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:282 */
+			interrupts = < 0x40 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:283 */
+			interrupt-names = "wakeup";      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:284 */
+			status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:285 */
+		};
+
+		/* node '/soc/timers@40009400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:288 */
+		lptim2: timers@40009400 {
+			compatible = "st,stm32u5-lptim",
+			             "st,stm32-lptim";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:289 */
+			clocks = < &rcc 0xa0 0x20 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:290 */
+			resets = < &rctl 0xf05 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:291 */
+			#address-cells = < 0x1 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:292 */
+			#size-cells = < 0x0 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:293 */
+			reg = < 0x40009400 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:294 */
+			interrupts = < 0x46 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:295 */
+			interrupt-names = "wakeup";      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:296 */
+			status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:297 */
+		};
+
+		/* node '/soc/serial@40013800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:300 */
+		usart1: serial@40013800 {
+			compatible = "st,stm32-usart",
+			             "st,stm32-uart";                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:301 */
+			reg = < 0x40013800 0x400 >;                     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:302 */
+			clocks = < &rcc 0xa4 0x4000 >;                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:303 */
+			resets = < &rctl 0xf8e >;                       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:304 */
+			interrupts = < 0x3a 0x0 >;                      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:305 */
+			pinctrl-0 = < &usart1_tx_pa9 &usart1_rx_pa10 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:62 */
+			pinctrl-names = "default";                      /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:63 */
+			status = "okay";                                /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:64 */
+			current-speed = < 0x1c200 >;                    /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:65 */
+		};
+
+		/* node '/soc/serial@40004400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:309 */
+		usart2: serial@40004400 {
+			compatible = "st,stm32-usart",
+			             "st,stm32-uart";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:310 */
+			reg = < 0x40004400 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:311 */
+			clocks = < &rcc 0x9c 0x20000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:312 */
+			resets = < &rctl 0xe91 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:313 */
+			interrupts = < 0x3b 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:314 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:315 */
+		};
+
+		/* node '/soc/serial@40004800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:318 */
+		usart3: serial@40004800 {
+			compatible = "st,stm32-usart",
+			             "st,stm32-uart";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:319 */
+			reg = < 0x40004800 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:320 */
+			clocks = < &rcc 0x9c 0x40000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:321 */
+			resets = < &rctl 0xe92 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:322 */
+			interrupts = < 0x3c 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:323 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:324 */
+		};
+
+		/* node '/soc/serial@44002400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:327 */
+		lpuart1: serial@44002400 {
+			compatible = "st,stm32-lpuart",
+			             "st,stm32-uart";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:328 */
+			reg = < 0x44002400 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:329 */
+			clocks = < &rcc 0xa8 0x40 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:330 */
+			resets = < &rctl 0x1006 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:331 */
+			interrupts = < 0x3f 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:332 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:333 */
+		};
+
+		/* node '/soc/watchdog@40003000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:336 */
+		iwdg: watchdog@40003000 {
+			compatible = "st,stm32-watchdog"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:337 */
+			reg = < 0x40003000 0x400 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:338 */
+			interrupts = < 0x23 0x0 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:339 */
+			status = "okay";                  /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:159 */
+		};
+
+		/* node '/soc/watchdog@40002c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:343 */
+		wwdg: watchdog@40002c00 {
+			compatible = "st,stm32-window-watchdog"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:344 */
+			reg = < 0x40002c00 0x400 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:345 */
+			clocks = < &rcc 0x9c 0x800 >;            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:346 */
+			interrupts = < 0x0 0x0 >;                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:347 */
+			status = "disabled";                     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:348 */
+		};
+
+		/* node '/soc/dac@42028400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:351 */
+		dac1: dac@42028400 {
+			compatible = "st,stm32-dac";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:352 */
+			reg = < 0x42028400 0x400 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:353 */
+			clocks = < &rcc 0x8c 0x800 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:354 */
+			status = "disabled";          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:355 */
+			#io-channel-cells = < 0x1 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:356 */
+		};
+
+		/* node '/soc/adc@42028000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:359 */
+		adc12_common: adc@42028000 {
+			compatible = "st,stm32-adc";                                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:360 */
+			#address-cells = < 0x1 >;                                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:361 */
+			#size-cells = < 0x1 >;                                      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:362 */
+			reg = < 0x42028000 0x400 >;                                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:363 */
+			ranges;                                                     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:364 */
+			clocks = < &rcc 0x8c 0x400 >,
+			         < &rcc 0x8 0x4000e8 >;                             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:365 */
+			clock-names = "adcx",
+			              "adc_ker";                                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:367 */
+			st,adc-resolutions = < 0xc 0xa 0x8 0x6 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:368 */
+			sampling-times = < 0x3 0x7 0xd 0x19 0x30 0x5d 0xf8 0x281 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:369 */
+			st,adc-sequencer = "programmable";                          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:370 */
+			st,adc-oversampler = "minimal";                             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:371 */
+			st,adc-internal-regulator = "startup-sw-delay";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:372 */
+			st,adc-has-deep-powerdown;                                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:373 */
+			st,adc-has-differential-support;                            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:374 */
+			st,adc-has-injected-support;                                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:375 */
+			st,adc-prescaler = < 0x8 >;                                 /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:101 */
+			st,adc-clock-source = "ASYNC";                              /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:102 */
+			status = "okay";                                            /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:103 */
+
+			/* node '/soc/adc@42028000/adc@42028000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:378 */
+			adc1: adc@42028000 {
+				reg = < 0x42028000 0x100 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:379 */
+				interrupts = < 0x25 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:380 */
+				#io-channel-cells = < 0x1 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:381 */
+				pinctrl-0 = < &adc1_inp1_pa1 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:95 */
+				pinctrl-names = "default";      /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:96 */
+				status = "okay";                /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:97 */
+				phandle = < 0x1c >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:826 */
+			};
+
+			/* node '/soc/adc@42028000/adc@42028100' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:78 */
+			adc2: adc@42028100 {
+				reg = < 0x42028100 0x100 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:79 */
+				interrupts = < 0x45 0x0 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:80 */
+				#io-channel-cells = < 0x1 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:81 */
+				status = "okay";             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:107 */
+				phandle = < 0x1e >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:116 */
+			};
+		};
+
+		/* node '/soc/rtc@44007800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:386 */
+		rtc: rtc@44007800 {
+			compatible = "st,stm32-rtc";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:387 */
+			reg = < 0x44007800 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:388 */
+			interrupts = < 0x2 0x0 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:389 */
+			prescaler = < 0x8000 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:391 */
+			alarms-count = < 0x2 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:392 */
+			alrm-exti-line = < 0x11 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:393 */
+			clocks = < &rcc 0xa8 0x200000 >,
+			         < &rcc 0x2 0x12800f0 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:84 */
+			status = "okay";                 /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:85 */
+		};
+
+		/* node '/soc/timers@40012c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:397 */
+		timers1: timers@40012c00 {
+			compatible = "st,stm32-timers"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:398 */
+			reg = < 0x40012c00 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:399 */
+			clocks = < &rcc 0xa4 0x800 >,
+			         < &rcc 0xd 0xff >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:400 */
+			resets = < &rctl 0xf8b >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:402 */
+			interrupts = < 0x29 0x0 >,
+			             < 0x2a 0x0 >,
+			             < 0x2b 0x0 >,
+			             < 0x2c 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:403 */
+			interrupt-names = "brk",
+			                  "up",
+			                  "trgcom",
+			                  "cc";         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:404 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:405 */
+
+			/* node '/soc/timers@40012c00/pwm' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:407 */
+			pwm {
+				compatible = "st,stm32-pwm"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:408 */
+				status = "disabled";         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:409 */
+				#pwm-cells = < 0x3 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:410 */
+			};
+
+			/* node '/soc/timers@40012c00/counter' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:413 */
+			counter {
+				compatible = "st,stm32-counter";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:414 */
+				status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:415 */
+				#counter-capture-cells = < 0x2 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:416 */
+			};
+
+			/* node '/soc/timers@40012c00/qdec' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:419 */
+			qdec {
+				compatible = "st,stm32-qdec";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:420 */
+				st,input-filter-level = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:421 */
+				status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:422 */
+			};
+		};
+
+		/* node '/soc/timers@40000000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:426 */
+		timers2: timers@40000000 {
+			compatible = "st,stm32-timers"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:427 */
+			reg = < 0x40000000 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:428 */
+			clocks = < &rcc 0x9c 0x1 >,
+			         < &rcc 0xc 0xff >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:429 */
+			resets = < &rctl 0xe80 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:431 */
+			interrupts = < 0x2d 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:432 */
+			interrupt-names = "global";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:433 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:434 */
+
+			/* node '/soc/timers@40000000/pwm' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:436 */
+			pwm {
+				compatible = "st,stm32-pwm"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:437 */
+				status = "disabled";         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:438 */
+				#pwm-cells = < 0x3 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:439 */
+			};
+
+			/* node '/soc/timers@40000000/counter' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:442 */
+			counter {
+				compatible = "st,stm32-counter";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:443 */
+				status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:444 */
+				#counter-capture-cells = < 0x2 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:445 */
+			};
+
+			/* node '/soc/timers@40000000/qdec' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:448 */
+			qdec {
+				compatible = "st,stm32-qdec";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:449 */
+				st,input-filter-level = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:450 */
+				status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:451 */
+			};
+		};
+
+		/* node '/soc/timers@40000400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:455 */
+		timers3: timers@40000400 {
+			compatible = "st,stm32-timers"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:456 */
+			reg = < 0x40000400 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:457 */
+			clocks = < &rcc 0x9c 0x2 >,
+			         < &rcc 0xc 0xff >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:458 */
+			resets = < &rctl 0xe81 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:460 */
+			interrupts = < 0x2e 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:461 */
+			interrupt-names = "global";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:462 */
+			status = "okay";                /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:51 */
+			st,prescaler = < 0x18 >;        /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:52 */
+
+			/* node '/soc/timers@40000400/pwm' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:465 */
+			pwm3: pwm {
+				compatible = "st,stm32-pwm";                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:466 */
+				#pwm-cells = < 0x3 >;                        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:468 */
+				status = "okay";                             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:55 */
+				pinctrl-0 = < &tim3_ch3_pb0 &tim3_ch4_pb1 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:56 */
+				pinctrl-names = "default";                   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:57 */
+			};
+
+			/* node '/soc/timers@40000400/counter' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:471 */
+			counter {
+				compatible = "st,stm32-counter";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:472 */
+				status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:473 */
+				#counter-capture-cells = < 0x2 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:474 */
+			};
+
+			/* node '/soc/timers@40000400/qdec' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:477 */
+			qdec {
+				compatible = "st,stm32-qdec";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:478 */
+				st,input-filter-level = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:479 */
+				status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:480 */
+			};
+		};
+
+		/* node '/soc/timers@40001000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:484 */
+		timers6: timers@40001000 {
+			compatible = "st,stm32-timers"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:485 */
+			reg = < 0x40001000 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:486 */
+			clocks = < &rcc 0x9c 0x10 >,
+			         < &rcc 0xc 0xff >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:487 */
+			resets = < &rctl 0xe84 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:489 */
+			interrupts = < 0x31 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:490 */
+			interrupt-names = "global";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:491 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:492 */
+
+			/* node '/soc/timers@40001000/counter' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:494 */
+			counter {
+				compatible = "st,stm32-counter";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:495 */
+				status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:496 */
+				#counter-capture-cells = < 0x2 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:497 */
+			};
+		};
+
+		/* node '/soc/timers@40001400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:501 */
+		timers7: timers@40001400 {
+			compatible = "st,stm32-timers"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:502 */
+			reg = < 0x40001400 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:503 */
+			clocks = < &rcc 0x9c 0x20 >,
+			         < &rcc 0xc 0xff >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:504 */
+			resets = < &rctl 0xe85 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:506 */
+			interrupts = < 0x32 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:507 */
+			interrupt-names = "global";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:508 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:509 */
+
+			/* node '/soc/timers@40001400/counter' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:511 */
+			counter {
+				compatible = "st,stm32-counter";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:512 */
+				status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:513 */
+				#counter-capture-cells = < 0x2 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:514 */
+			};
+		};
+
+		/* node '/soc/i2c@40005400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:518 */
+		i2c1: i2c@40005400 {
+			compatible = "st,stm32-i2c-v2";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:519 */
+			#address-cells = < 0x1 >;                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:521 */
+			#size-cells = < 0x0 >;                       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:522 */
+			reg = < 0x40005400 0x400 >;                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:523 */
+			clocks = < &rcc 0x9c 0x200000 >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:524 */
+			interrupts = < 0x33 0x0 >,
+			             < 0x34 0x0 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:525 */
+			interrupt-names = "event",
+			                  "error";                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:526 */
+			pinctrl-0 = < &i2c1_scl_pb6 &i2c1_sda_pb7 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:69 */
+			pinctrl-names = "default";                   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:70 */
+			scl-gpios = < &gpiob 0x6 0x0 >;              /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:71 */
+			sda-gpios = < &gpiob 0x7 0x0 >;              /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:72 */
+			status = "okay";                             /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:73 */
+			clock-frequency = < 0x61a80 >;               /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:74 */
+			phandle = < 0x1f >;                          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:860 */
+		};
+
+		/* node '/soc/i2c@40005800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:530 */
+		i2c2: i2c@40005800 {
+			compatible = "st,stm32-i2c-v2";  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:531 */
+			clock-frequency = < 0x186a0 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:532 */
+			#address-cells = < 0x1 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:533 */
+			#size-cells = < 0x0 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:534 */
+			reg = < 0x40005800 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:535 */
+			clocks = < &rcc 0x9c 0x400000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:536 */
+			interrupts = < 0x35 0x0 >,
+			             < 0x36 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:537 */
+			interrupt-names = "event",
+			                  "error";       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:538 */
+			status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:539 */
+			phandle = < 0x20 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:868 */
+		};
+
+		/* node '/soc/i3c@40005c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:542 */
+		i3c1: i3c@40005c00 {
+			compatible = "st,stm32-i3c";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:543 */
+			reg = < 0x40005c00 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:544 */
+			interrupts = < 0x7b 0x0 >,
+			             < 0x7c 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:545 */
+			interrupt-names = "event",
+			                  "error";       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:546 */
+			#address-cells = < 0x3 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:547 */
+			#size-cells = < 0x0 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:548 */
+			clocks = < &rcc 0x9c 0x800000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:549 */
+			resets = < &rctl 0xe97 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:550 */
+			zephyr,pm-device-runtime-auto;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:551 */
+			status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:552 */
+		};
+
+		/* node '/soc/i3c@44003000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:555 */
+		i3c2: i3c@44003000 {
+			compatible = "st,stm32-i3c";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:556 */
+			reg = < 0x44003000 0x400 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:557 */
+			interrupts = < 0x83 0x0 >,
+			             < 0x84 0x0 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:558 */
+			interrupt-names = "event",
+			                  "error";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:559 */
+			#address-cells = < 0x3 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:560 */
+			#size-cells = < 0x0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:561 */
+			clocks = < &rcc 0xa8 0x200 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:562 */
+			resets = < &rctl 0x1009 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:563 */
+			zephyr,pm-device-runtime-auto; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:564 */
+			status = "disabled";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:565 */
+		};
+
+		/* node '/soc/spi@40013000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:568 */
+		spi1: spi@40013000 {
+			compatible = "st,stm32h7-spi",
+			             "st,stm32-spi-fifo",
+			             "st,stm32-spi";                                               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:569 */
+			#address-cells = < 0x1 >;                                                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:570 */
+			#size-cells = < 0x0 >;                                                     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:571 */
+			reg = < 0x40013000 0x400 >;                                                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:572 */
+			interrupts = < 0x37 0x0 >;                                                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:573 */
+			clocks = < &rcc 0xa4 0x1000 >,
+			         < &rcc 0xf 0x4000e0 >;                                            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:574 */
+			st,spi-data-width = "full-4-to-32-bit";                                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:576 */
+			fifo-size = < 0x10 >;                                                      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:577 */
+			fifo-max-transfer-size = < 0xffff >;                                       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:578 */
+			pinctrl-0 = < &spi1_sck_pa5 &spi1_nss_pa4 &spi1_miso_pa6 &spi1_mosi_pa7 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:78 */
+			pinctrl-names = "default";                                                 /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:79 */
+			status = "okay";                                                           /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:80 */
+		};
+
+		/* node '/soc/spi@40003800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:582 */
+		spi2: spi@40003800 {
+			compatible = "st,stm32h7-spi",
+			             "st,stm32-spi-fifo",
+			             "st,stm32-spi";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:583 */
+			#address-cells = < 0x1 >;               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:584 */
+			#size-cells = < 0x0 >;                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:585 */
+			reg = < 0x40003800 0x400 >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:586 */
+			interrupts = < 0x38 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:587 */
+			clocks = < &rcc 0x9c 0x4000 >,
+			         < &rcc 0xf 0x4300e0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:588 */
+			st,spi-data-width = "full-4-to-32-bit"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:590 */
+			fifo-size = < 0x10 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:591 */
+			fifo-max-transfer-size = < 0xffff >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:592 */
+			status = "disabled";                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:593 */
+		};
+
+		/* node '/soc/spi@40003c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:596 */
+		spi3: spi@40003c00 {
+			compatible = "st,stm32h7-spi",
+			             "st,stm32-spi-fifo",
+			             "st,stm32-spi";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:597 */
+			#address-cells = < 0x1 >;               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:598 */
+			#size-cells = < 0x0 >;                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:599 */
+			reg = < 0x40003c00 0x400 >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:600 */
+			interrupts = < 0x39 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:601 */
+			clocks = < &rcc 0x9c 0x8000 >,
+			         < &rcc 0xf 0x4600e0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:602 */
+			st,spi-data-width = "full-4-to-32-bit"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:604 */
+			fifo-size = < 0x10 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:605 */
+			fifo-max-transfer-size = < 0xffff >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:606 */
+			status = "disabled";                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:607 */
+		};
+
+		/* node '/soc/can@4000a400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:610 */
+		fdcan1: can@4000a400 {
+			compatible = "st,stm32-fdcan";                         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:611 */
+			reg = < 0x4000a400 0x400 >,
+			      < 0x4000ac00 0x350 >;                            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:612 */
+			reg-names = "m_can",
+			            "message_ram";                             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:613 */
+			interrupts = < 0x27 0x0 >,
+			             < 0x28 0x0 >;                             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:614 */
+			interrupt-names = "int0",
+			                  "int1";                              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:615 */
+			clocks = < &rcc 0xa0 0x200 >,
+			         < &rcc 0x4 0x2800e8 >;                        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:616 */
+			bosch,mram-cfg = < 0x0 0x1c 0x8 0x3 0x3 0x0 0x3 0x3 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:618 */
+			status = "disabled";                                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:619 */
+		};
+
+		/* node '/soc/crypto@420c0400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:622 */
+		hash: crypto@420c0400 {
+			compatible = "st,stm32-hash";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:623 */
+			reg = < 0x420c0400 0x800 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:624 */
+			clocks = < &rcc 0x8c 0x20000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:625 */
+			resets = < &rctl 0xc91 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:626 */
+			interrupts = < 0x75 0x0 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:627 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:628 */
+			st,has-sha384-algorithm;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:87 */
+			st,has-sha512-algorithm;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:88 */
+		};
+
+		/* node '/soc/rng@420c0800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:631 */
+		rng: rng@420c0800 {
+			compatible = "st,stm32-rng";        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:632 */
+			reg = < 0x420c0800 0x400 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:633 */
+			clocks = < &rcc 0x8c 0x40000 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:634 */
+			interrupts = < 0x72 0x0 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:635 */
+			nist-config = < 0x8f01e00 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:92 */
+			health-test-config = < 0x6689 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:93 */
+			noise-source-control = < 0x2357f >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:94 */
+			status = "okay";                    /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:163 */
+		};
+
+		/* node '/soc/dma@40020000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:641 */
+		gpdma1: dma@40020000 {
+			compatible = "st,stm32u5-dma"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:642 */
+			#dma-cells = < 0x3 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:643 */
+			reg = < 0x40020000 0x1000 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:644 */
+			interrupts = < 0x1b 0x0 >,
+			             < 0x1c 0x0 >,
+			             < 0x1d 0x0 >,
+			             < 0x1e 0x0 >,
+			             < 0x1f 0x0 >,
+			             < 0x20 0x0 >,
+			             < 0x21 0x0 >,
+			             < 0x22 0x0 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:645 */
+			clocks = < &rcc 0x88 0x1 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:646 */
+			dma-channels = < 0x8 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:647 */
+			dma-requests = < 0x8c >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:648 */
+			status = "disabled";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:649 */
+			phandle = < 0x11 >;            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:670 */
+		};
+
+		/* node '/soc/dma@40021000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:652 */
+		gpdma2: dma@40021000 {
+			compatible = "st,stm32u5-dma"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:653 */
+			#dma-cells = < 0x3 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:654 */
+			reg = < 0x40021000 0x1000 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:655 */
+			interrupts = < 0x5a 0x0 >,
+			             < 0x5b 0x0 >,
+			             < 0x5c 0x0 >,
+			             < 0x5d 0x0 >,
+			             < 0x5e 0x0 >,
+			             < 0x5f 0x0 >,
+			             < 0x60 0x0 >,
+			             < 0x61 0x0 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:656 */
+			clocks = < &rcc 0x88 0x2 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:657 */
+			dma-channels = < 0x8 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:658 */
+			dma-requests = < 0x8c >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:659 */
+			status = "disabled";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:660 */
+		};
+
+		/* node '/soc/i2s@40013000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:663 */
+		i2s1: i2s@40013000 {
+			compatible = "st,stm32h7-i2s",
+			             "st,stm32-i2s";        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:664 */
+			#address-cells = < 0x1 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:665 */
+			#size-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:666 */
+			reg = < 0x40013000 0x400 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:667 */
+			clocks = < &rcc 0xa4 0x1000 >,
+			         < &rcc 0xf 0x4000e0 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:668 */
+			dmas = < &gpdma1 0x0 0x7 0x22c40 >,
+			       < &gpdma1 0x1 0x6 0x22c80 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:670 */
+			dma-names = "tx",
+			            "rx";                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:674 */
+			interrupts = < 0x37 0x0 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:675 */
+			status = "disabled";                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:676 */
+		};
+
+		/* node '/soc/i2s@40003800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:679 */
+		i2s2: i2s@40003800 {
+			compatible = "st,stm32h7-i2s",
+			             "st,stm32-i2s";        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:680 */
+			#address-cells = < 0x1 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:681 */
+			#size-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:682 */
+			reg = < 0x40003800 0x400 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:683 */
+			clocks = < &rcc 0x9c 0x4000 >,
+			         < &rcc 0xf 0x4300e0 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:684 */
+			dmas = < &gpdma1 0x2 0x9 0x22c40 >,
+			       < &gpdma1 0x3 0x8 0x22c80 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:686 */
+			dma-names = "tx",
+			            "rx";                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:690 */
+			interrupts = < 0x38 0x0 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:691 */
+			status = "disabled";                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:692 */
+		};
+
+		/* node '/soc/i2s@40003c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:695 */
+		i2s3: i2s@40003c00 {
+			compatible = "st,stm32h7-i2s",
+			             "st,stm32-i2s";        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:696 */
+			#address-cells = < 0x1 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:697 */
+			#size-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:698 */
+			reg = < 0x40003c00 0x400 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:699 */
+			clocks = < &rcc 0x9c 0x8000 >,
+			         < &rcc 0xf 0x4600e0 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:700 */
+			dmas = < &gpdma1 0x4 0xb 0x22c40 >,
+			       < &gpdma1 0x5 0xa 0x22c80 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:702 */
+			dma-names = "tx",
+			            "rx";                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:706 */
+			interrupts = < 0x39 0x0 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:707 */
+			status = "disabled";                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:708 */
+		};
+
+		/* node '/soc/usb@40016000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:711 */
+		usb: zephyr_udc0: usb@40016000 {
+			compatible = "st,stm32-usb";               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:712 */
+			reg = < 0x40016000 0x400 >;                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:713 */
+			interrupts = < 0x4a 0x0 >;                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:714 */
+			interrupt-names = "usb";                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:715 */
+			num-bidir-endpoints = < 0x8 >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:716 */
+			ram-size = < 0x800 >;                      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:717 */
+			maximum-speed = "full-speed";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:718 */
+			phys = < &usb_fs_phy >;                    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:719 */
+			clocks = < &rcc 0xa4 0x1000000 >,
+			         < &rcc 0x7 0x32400e4 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:720 */
+			pinctrl-0 = < &usb_dm_pa11 &usb_dp_pa12 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:89 */
+			pinctrl-names = "default";                 /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:90 */
+			status = "okay";                           /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:19 */
+
+			/* node '/soc/usb@40016000/board_cdc_acm_uart' defined in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:21 */
+			board_cdc_acm_uart: board_cdc_acm_uart {
+				compatible = "zephyr,cdc-acm-uart"; /* in ../../Source/embedded/fido2-eval/firmware/overlays/blackpill_h523ce_cdc.overlay:22 */
+			};
+		};
+
+		/* node '/soc/ucpd@4000dc00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:725 */
+		ucpd1: ucpd@4000dc00 {
+			compatible = "st,stm32-ucpd";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:726 */
+			reg = < 0x4000dc00 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:727 */
+			clocks = < &rcc 0xa0 0x800000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:728 */
+			interrupts = < 0x4c 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:729 */
+			status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:730 */
+		};
+
+		/* node '/soc/digi_dietemp@40008c00' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:733 */
+		digi_die_temp: digi_dietemp@40008c00 {
+			compatible = "st,stm32-digi-temp"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:734 */
+			reg = < 0x40008c00 0x400 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:735 */
+			interrupts = < 0x71 0x0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:736 */
+			interrupt-names = "digi_temp";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:737 */
+			clocks = < &rcc 0xa0 0x8 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:738 */
+			status = "disabled";               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:739 */
+		};
+
+		/* node '/soc/power@44020800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:742 */
+		pwr: power@44020800 {
+			compatible = "st,stm32-pwr"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:743 */
+			reg = < 0x44020800 0x400 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:744 */
+
+			/* node '/soc/power@44020800/wakeup-controller' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:746 */
+			wakeup-controller {
+				compatible = "st,stm32-pwr-wkupctrl"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:747 */
+				#address-cells = < 0x1 >;             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:748 */
+				#size-cells = < 0x0 >;                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:749 */
+				status = "disabled";                  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:750 */
+				st,max-wkup-line-idx = < 0x8 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:752 */
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@1' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:754 */
+				wkup@1 {
+					reg = < 0x1 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:755 */
+					wkup-gpios = < &gpioa 0x0 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:756 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@2' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:759 */
+				wkup@2 {
+					reg = < 0x2 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:760 */
+					wkup-gpios = < &gpioa 0x2 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:761 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@3' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:764 */
+				wkup@3 {
+					reg = < 0x3 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:765 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@4' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:769 */
+				wkup@4 {
+					reg = < 0x4 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:770 */
+					wkup-gpios = < &gpioc 0xd 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:771 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@5' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:774 */
+				wkup@5 {
+					reg = < 0x5 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:775 */
+					wkup-gpios = < &gpiob 0x7 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:776 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@6' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:779 */
+				wkup@6 {
+					reg = < 0x6 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:780 */
+					wkup-gpios = < &gpioc 0x1 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:100 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@7' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:784 */
+				wkup@7 {
+					reg = < 0x7 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:785 */
+					wkup-gpios = < &gpiod 0x2 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:104 */
+				};
+
+				/* node '/soc/power@44020800/wakeup-controller/wkup@8' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:789 */
+				wkup@8 {
+					reg = < 0x8 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:790 */
+					wkup-gpios = < &gpiod 0x3 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:108 */
+				};
+			};
+		};
+
+		/* node '/soc/crc@40023000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:796 */
+		crc: crc@40023000 {
+			compatible = "st,stm32-crc";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:797 */
+			reg = < 0x40023000 0x400 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:798 */
+			clocks = < &rcc 0x88 0x1000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:799 */
+			resets = < &rctl 0xc0c >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:800 */
+			status = "disabled";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:801 */
+		};
+
+		/* node '/soc/memory-controller@47000400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:48 */
+		fmc: memory-controller@47000400 {
+			compatible = "st,stm32-fmc";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:49 */
+			reg = < 0x47000400 0x400 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:50 */
+			clocks = < &rcc 0x94 0x10000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:51 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:52 */
+		};
+
+		/* node '/soc/can@4000a800' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:55 */
+		fdcan2: can@4000a800 {
+			compatible = "st,stm32-fdcan";                           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:56 */
+			reg = < 0x4000a800 0x400 >,
+			      < 0x4000ac00 0x6a0 >;                              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:57 */
+			reg-names = "m_can",
+			            "message_ram";                               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:58 */
+			interrupts = < 0x6d 0x0 >,
+			             < 0x6e 0x0 >;                               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:59 */
+			interrupt-names = "int0",
+			                  "int1";                                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:60 */
+			clocks = < &rcc 0xa0 0x200 >,
+			         < &rcc 0x4 0x2800e8 >;                          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:62 */
+			bosch,mram-cfg = < 0x350 0x1c 0x8 0x3 0x3 0x0 0x3 0x3 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:64 */
+			status = "disabled";                                     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:65 */
+		};
+
+		/* node '/soc/vrefbuf@44007400' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:68 */
+		vrefbuf: vrefbuf@44007400 {
+			compatible = "st,stm32-vrefbuf"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:69 */
+			reg = < 0x44007400 0x400 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:70 */
+			clocks = < &rcc 0xa8 0x100000 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:71 */
+			resets = < &rctl 0x1014 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:72 */
+			ref-voltages = < 0x2625a0 >,
+			               < 0x1f4000 >,
+			               < 0x1b7740 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:73 */
+			status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:74 */
+		};
+	};
+
+	/* node '/cpus' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:28 */
+	cpus {
+		#address-cells = < 0x1 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:29 */
+		#size-cells = < 0x0 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:30 */
+
+		/* node '/cpus/cpu@0' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:32 */
+		cpu0: cpu@0 {
+			device_type = "cpu";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:33 */
+			compatible = "arm,cortex-m33"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:34 */
+			reg = < 0x0 >;                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:35 */
+			cpu-power-states = < &stop >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:36 */
+			d-cache-line-size = < 0x10 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:37 */
+			i-cache-line-size = < 0x10 >;  /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:38 */
+			#address-cells = < 0x1 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:39 */
+			#size-cells = < 0x1 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:40 */
+
+			/* node '/cpus/cpu@0/mpu@e000ed90' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:42 */
+			mpu: mpu@e000ed90 {
+				compatible = "arm,armv8m-mpu"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:43 */
+				reg = < 0xe000ed90 0x40 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:44 */
+			};
+		};
+
+		/* node '/cpus/power-states' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:48 */
+		power-states {
+
+			/* node '/cpus/power-states/state0' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:49 */
+			stop: state0 {
+				compatible = "zephyr,power-state";    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:50 */
+				power-state-name = "suspend-to-idle"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:51 */
+				substate-id = < 0x1 >;                /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:52 */
+				min-residency-us = < 0x14 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:53 */
+				phandle = < 0x18 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:36 */
+			};
+		};
+	};
+
+	/* node '/clocks' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:58 */
+	clocks {
+
+		/* node '/clocks/clk-hse' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:59 */
+		clk_hse: clk-hse {
+			#clock-cells = < 0x0 >;            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:60 */
+			compatible = "st,stm32-hse-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:61 */
+			status = "okay";                   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:127 */
+			clock-frequency = < 0x7a1200 >;    /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:128 */
+			phandle = < 0x19 >;                /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:146 */
+		};
+
+		/* node '/clocks/clk-hsi' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:65 */
+		clk_hsi: clk-hsi {
+			#clock-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:66 */
+			compatible = "st,stm32h7-hsi-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:67 */
+			hsi-div = < 0x1 >;                   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:68 */
+			clock-frequency = < 0x3d09000 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:69 */
+			status = "okay";                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:119 */
+		};
+
+		/* node '/clocks/clk-hsi48' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:73 */
+		clk_hsi48: clk-hsi48 {
+			#clock-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:74 */
+			compatible = "st,stm32-hsi48-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:75 */
+			clock-frequency = < 0x2dc6c00 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:76 */
+			status = "okay";                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:123 */
+		};
+
+		/* node '/clocks/clk-csi' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:80 */
+		clk_csi: clk-csi {
+			#clock-cells = < 0x0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:81 */
+			compatible = "fixed-clock";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:82 */
+			clock-frequency = < 0x3d0900 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:83 */
+			status = "disabled";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:84 */
+		};
+
+		/* node '/clocks/clk-lse' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:87 */
+		clk_lse: clk-lse {
+			#clock-cells = < 0x0 >;            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:88 */
+			compatible = "st,stm32-lse-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:89 */
+			clock-frequency = < 0x8000 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:90 */
+			driving-capability = < 0x2 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:91 */
+			status = "okay";                   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:115 */
+		};
+
+		/* node '/clocks/clk-lsi' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:95 */
+		clk_lsi: clk-lsi {
+			#clock-cells = < 0x0 >;       /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:96 */
+			compatible = "fixed-clock";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:97 */
+			clock-frequency = < 0x7d00 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:98 */
+			status = "okay";              /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:111 */
+		};
+
+		/* node '/clocks/pll' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:102 */
+		pll1: pll: pll {
+			#clock-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:103 */
+			compatible = "st,stm32h5-pll-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:104 */
+			div-m = < 0x1 >;                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:141 */
+			mul-n = < 0x3c >;                    /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:142 */
+			div-p = < 0x2 >;                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:143 */
+			div-q = < 0x2 >;                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:144 */
+			div-r = < 0x2 >;                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:145 */
+			clocks = < &clk_hse >;               /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:146 */
+			status = "okay";                     /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:147 */
+			phandle = < 0x3 >;                   /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:132 */
+		};
+
+		/* node '/clocks/pll2' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:108 */
+		pll2: pll2 {
+			#clock-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:109 */
+			compatible = "st,stm32h5-pll-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:110 */
+			status = "disabled";                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:111 */
+		};
+
+		/* node '/clocks/pll3' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:12 */
+		pll3: pll3 {
+			#clock-cells = < 0x0 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:13 */
+			compatible = "st,stm32h5-pll-clock"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:14 */
+			status = "disabled";                 /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:15 */
+		};
+	};
+
+	/* node '/mcos' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:115 */
+	mcos {
+
+		/* node '/mcos/mco1' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:116 */
+		mco1: mco1 {
+			compatible = "st,stm32-clock-mco"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:117 */
+			clock-names = "clksel";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:118 */
+			status = "disabled";               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:119 */
+		};
+
+		/* node '/mcos/mco2' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:122 */
+		mco2: mco2 {
+			compatible = "st,stm32-clock-mco"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:123 */
+			clock-names = "clksel";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:124 */
+			status = "disabled";               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:125 */
+		};
+	};
+
+	/* node '/iocell' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:805 */
+	iocell: iocell {
+		compatible = "st,stm32h5-iocell",
+		             "st,stm32-iocell";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:806 */
+		status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:807 */
+
+		/* node '/iocell/vddio' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:809 */
+		vddio {
+			domain = < 0x0 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:810 */
+		};
+
+		/* node '/iocell/vddio2' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:813 */
+		vddio2 {
+			domain = < 0x1 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:814 */
+		};
+	};
+
+	/* node '/dietemp' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:818 */
+	die_temp: dietemp {
+		compatible = "st,stm32-temp-cal"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:819 */
+		nvmem-cells = < &ts_cal1_otp >,
+		              < &ts_cal2_otp >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:820 */
+		nvmem-cell-names = "TS_CAL1",
+		                   "TS_CAL2";     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:821 */
+		ts-cal1-temp = < 0x1e >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:822 */
+		ts-cal2-temp = < 0x82 >;          /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:823 */
+		ts-cal-vrefanalog = < 0xce4 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:824 */
+		ts-cal-resolution = < 0xc >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:825 */
+		io-channels = < &adc1 0x10 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:826 */
+		status = "disabled";              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:827 */
+	};
+
+	/* node '/vref' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:830 */
+	vref: vref {
+		compatible = "st,stm32-vref";   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:831 */
+		nvmem-cells = < &vrefint_otp >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:832 */
+		vrefint-cal-mv = < 0xce4 >;     /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:833 */
+		io-channels = < &adc1 0x11 >;   /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:834 */
+		status = "okay";                /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:151 */
+	};
+
+	/* node '/vbat' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:838 */
+	vbat: vbat {
+		compatible = "st,stm32-vbat"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:839 */
+		ratio = < 0x4 >;              /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:840 */
+		io-channels = < &adc2 0x10 >; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:116 */
+		status = "okay";              /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:155 */
+	};
+
+	/* node '/vddcore' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:845 */
+	vddcore: vddcore {
+		compatible = "st,stm32-vddcore"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:846 */
+		status = "disabled";             /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:848 */
+		io-channels = < &adc2 0x11 >;    /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523.dtsi:120 */
+	};
+
+	/* node '/usbphy' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:851 */
+	usb_fs_phy: usbphy {
+		compatible = "usb-nop-xceiv"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:852 */
+		#phy-cells = < 0x0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:853 */
+		phandle = < 0x12 >;           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:719 */
+	};
+
+	/* node '/smbus1' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:856 */
+	smbus1: smbus1 {
+		compatible = "st,stm32-smbus"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:857 */
+		#address-cells = < 0x1 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:858 */
+		#size-cells = < 0x0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:859 */
+		i2c = < &i2c1 >;               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:860 */
+		status = "disabled";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:861 */
+	};
+
+	/* node '/smbus2' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:864 */
+	smbus2: smbus2 {
+		compatible = "st,stm32-smbus"; /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:865 */
+		#address-cells = < 0x1 >;      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:866 */
+		#size-cells = < 0x0 >;         /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:867 */
+		i2c = < &i2c2 >;               /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:868 */
+		status = "disabled";           /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h5.dtsi:869 */
+	};
+
+	/* node '/memory@20000000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:10 */
+	sram1: memory@20000000 {
+		compatible = "zephyr,memory-region",
+		             "mmio-sram";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:11 */
+		reg = < 0x20000000 0x20000 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:12 */
+		zephyr,memory-region = "SRAM1";      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:13 */
+	};
+
+	/* node '/memory@20020000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:16 */
+	sram2: memory@20020000 {
+		compatible = "zephyr,memory-region",
+		             "mmio-sram";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:17 */
+		reg = < 0x20020000 0x14000 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:18 */
+		zephyr,memory-region = "SRAM2";      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:19 */
+	};
+
+	/* node '/memory@20034000' defined in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:22 */
+	sram3: memory@20034000 {
+		compatible = "zephyr,memory-region",
+		             "mmio-sram";            /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:23 */
+		reg = < 0x20034000 0x10000 >;        /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:24 */
+		zephyr,memory-region = "SRAM3";      /* in ../../Source/embedded/zephyr/dts/arm/st/h5/stm32h523Xe.dtsi:25 */
+	};
+
+	/* node '/leds' defined in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:23 */
+	leds {
+		compatible = "gpio-leds"; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:24 */
+
+		/* node '/leds/led' defined in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:26 */
+		user_led: led {
+			gpios = < &gpioc 0xd 0x1 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:27 */
+			label = "User LED";         /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:28 */
+		};
+	};
+
+	/* node '/gpio_keys' defined in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:32 */
+	buttons: gpio_keys {
+		compatible = "gpio-keys"; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:33 */
+
+		/* node '/gpio_keys/button' defined in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:35 */
+		user_button: button {
+			label = "KEY";               /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:36 */
+			gpios = < &gpioa 0x0 0x11 >; /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:37 */
+			zephyr,code = < 0xb >;       /* in ../../Source/embedded/zephyr/boards/weact/blackpill_h523ce/blackpill_h523ce.dts:38 */
+		};
+	};
+};

@@ -1,0 +1,35 @@
+diff --git a/samples/subsys/authentication/fido2/boards/blackpill_h523ce.overlay b/samples/subsys/authentication/fido2/boards/blackpill_h523ce.overlay
+index f9f2dcf6fdd..c4a9073f140 100644
+--- a/samples/subsys/authentication/fido2/boards/blackpill_h523ce.overlay
++++ b/samples/subsys/authentication/fido2/boards/blackpill_h523ce.overlay
+@@ -10,6 +10,7 @@
+ 	chosen {
+ 		zephyr,fido2-hid = &fido2_hid;
+ 		zephyr,fido2-up-input = &buttons;
++		zephyr,console = &board_cdc_acm_uart;
+ 	};
+ };
+ 
+@@ -21,6 +22,10 @@
+ 		in-report-size = <64>;
+ 		in-polling-period-us = <1000>;
+ 	};
++
++	board_cdc_acm_uart: board_cdc_acm_uart {
++		compatible = "zephyr,cdc-acm-uart";
++	};
+ };
+ 
+ &flash0 {
+diff --git a/samples/subsys/authentication/fido2/prj.conf b/samples/subsys/authentication/fido2/prj.conf
+index 7b8d372ca01..f6700e7e598 100644
+--- a/samples/subsys/authentication/fido2/prj.conf
++++ b/samples/subsys/authentication/fido2/prj.conf
+@@ -4,6 +4,7 @@ CONFIG_SAMPLE_USBD_PID=0x0012
+ 
+ CONFIG_FIDO2=y
+ CONFIG_FIDO2_TRANSPORT_USB_HID=y
++CONFIG_FIDO2_STORAGE_PSA_PROTECTED_STORAGE=y
+ CONFIG_FIDO2_LOG_LEVEL_INF=y
+ 
+ # zephyrFido2SAMPL

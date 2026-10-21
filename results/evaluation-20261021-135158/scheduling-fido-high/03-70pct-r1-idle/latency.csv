@@ -1,0 +1,1 @@
+trial,warmup,success,error,start_offset_ns,pin_exchange_ns,assertion_ns,ctap_total_ns,gate_ns,up_wait_ns,wait_excluded_ns,pre_event_ns,resume_delay_ns,event_excluded_ns,up_sequence_before,up_sequence_after,dispatch_ns,applied_threshold_mdegc,workload_run_id,workload_start_tick,workload_end_tick,workload_overlap

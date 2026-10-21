@@ -1,0 +1,10 @@
+/*
+ * Replace temperature_sensor with the sensor node label.
+ * Requires SENSOR_CHAN_AMBIENT_TEMP support.
+ */
+
+/ {
+	aliases {
+		bench-sensor = &temperature_sensor;
+	};
+};

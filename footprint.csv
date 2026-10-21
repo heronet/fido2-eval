@@ -1,0 +1,4 @@
+variant,rom_bytes,static_ram_bytes,delta_rom_bytes,delta_static_ram_bytes,psa_provider
+baseline,56700,57475,0,0,none
+settings,121300,107945,64600,50470,zephyr_secure_storage
+psa-ps,121164,107945,64464,50470,zephyr_secure_storage

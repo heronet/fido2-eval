@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "running": false,
+  "threshold_mdegc": 30000,
+  "generation": 26,
+  "sample_mdegc": 29500,
+  "filtered_mdegc": 30193,
+  "alarm": true,
+  "rx_overflows": 0,
+  "tx_timeouts": 0,
+  "run_id": 1,
+  "now_tick": 1288400,
+  "begin_tick": 982492,
+  "end_tick": 36982492,
+  "window_active": false
+}

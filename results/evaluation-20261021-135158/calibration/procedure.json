@@ -1,0 +1,11 @@
+{
+  "targets": [
+    0.3,
+    0.7
+  ],
+  "tolerance_percentage_points": 1,
+  "calibration_duration_s": 3,
+  "validation_duration_s": 5,
+  "maximum_attempts_per_target": 6,
+  "definition": "mean idle job elapsed execution / 100 ms period"
+}

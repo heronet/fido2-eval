@@ -1,0 +1,62 @@
+{
+  "firmware": {
+    "build_id": "a2184c6e06837d3c7d4d6b2899b25534",
+    "fido_priority": 7,
+    "ok": true,
+    "schema": 1,
+    "node_id": "node-001",
+    "variant": "settings",
+    "fido_enabled": true,
+    "fido_error": 0,
+    "usb_error": 0,
+    "sensor_error": 0,
+    "workload": "synthetic_triangle",
+    "period_ticks": 1000,
+    "deadline_ticks": 1000,
+    "tick_hz": 10000,
+    "work_rounds": 1000,
+    "work_priority": 5,
+    "measurement_schema": 3,
+    "workload_clock": "cycle64",
+    "clock_hz": 240000000,
+    "psa_provider": "zephyr_secure_storage",
+    "up_clock": "cycle64",
+    "control_transport": "usb_cdc_acm",
+    "spiram_enabled": false,
+    "touch_enabled": false
+  },
+  "state": {
+    "ok": true,
+    "running": false,
+    "threshold_mdegc": 30000,
+    "generation": 0,
+    "sample_mdegc": 0,
+    "filtered_mdegc": 0,
+    "alarm": false,
+    "rx_overflows": 0,
+    "tx_timeouts": 0,
+    "run_id": 0,
+    "now_tick": 339980,
+    "begin_tick": 0,
+    "end_tick": 0,
+    "window_active": false
+  },
+  "ctap": {
+    "path": "/dev/hidraw0",
+    "versions": [
+      "FIDO_2_0",
+      "FIDO_2_1"
+    ],
+    "options": {
+      "rk": true,
+      "up": true,
+      "plat": false,
+      "alwaysUv": true,
+      "clientPin": true,
+      "pinUvAuthToken": true
+    },
+    "pin_uv_protocols": [
+      1
+    ]
+  }
+}
